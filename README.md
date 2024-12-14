@@ -44,6 +44,7 @@ Options:
                                   The input format
   -of, --output-format [JSON|XML|MD]
                                   The output format
+  -cf, --config TEXT              Config file path
   -c, --category TEXT             Category specifier for XML quizzes
   --help                          Show this message and exit.
 ```
@@ -51,8 +52,10 @@ Options:
 In order to specify input files, you can use the `--input-file` or the `--input-path` options.
 
 The `--input-file` option will expect the path to a file that contains one or multiple questions.
+You can also add multiple input files by separating them with a comma.
 In `Markdown`, multiple questions in the same file are separated by two empty lines.
 If you have multiple questions, one saved in each file, you can use the `--input-path` option.
+You may add multiple input directories by separating them with a comma, or use both input files and input directories by combining the `--input-path` and `--input-file` options.
 
 This will expect a path to a directory which contains multiple `.md`, `.xml` or `.json` questions.
 
@@ -141,6 +144,30 @@ total 96
 ```
 
 You can see that the questions are saved in a file with the question name as the filename.
+
+## Configuration File
+
+If you would like to pass the parameters through a config file, you can do this by writing a YAML file and passing it via the `-cf` or `--config` option.
+
+Here is a config example:
+```yaml
+- input_dir_path: questions/
+- input_file_path:
+	- questions1.md
+	- questions2.md
+- output_file_path: questions.xml
+- output_format: xml
+- input_format: md
+```
+
+Here is a list of all possible config options:
+- `input_file_path`: Input file path
+- `input_dir_path`: Input directory (read all `.input_format` files from the input path)
+- `output_file`: Output file path
+- `output_path`: Output directory (write questions in `Question_Title.output_format` files)
+- `input_format`: The input format
+- `output_format`: The output format
+- `category`: Category specifier for XML quizzes
 
 ## Question Format
 
